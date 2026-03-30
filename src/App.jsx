@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { branchProbabilities, buildSymmetricFutures, timelineBranchProbabilities } from "./math.js";
+import { evaluateConstraints } from "./constraints.js";
+import { classifyFold, computeFoldAperture, computeFoldScore } from "./foldScore.js";
+import { computeGammaEffective, computeVisibility } from "./visibility.js";
 
 const TAU = Math.PI * 2;
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -149,8 +152,44 @@ function FoldSpaceEngine() {
   const [mM, setMM] = useState(1.0);
   const [coupling, setCoupling] = useState(1.0);
   const [foldFactor, setFoldFactor] = useState(0.0);
+  const [showResearch, setShowResearch] = useState(false);
+  const [energy, setEnergy] = useState(0.55);
+  const [curvature, setCurvature] = useState(0.45);
+  const [coherence, setCoherence] = useState(0.52);
+  const [ethics, setEthics] = useState(0.0);
+  const [instability, setInstability] = useState(0.2);
+  const [eta, setEta] = useState(0.25);
   const [t, setT] = useState(0);
   useEffect(() => { const id = setInterval(() => setT(p => p + 0.02), 30); return () => clearInterval(id); }, []);
+
+  const foldScore = computeFoldScore({
+    curvature,
+    energy,
+    coherence,
+    ethics,
+    instability,
+  });
+  const foldClass = classifyFold(foldScore);
+  const aperture = computeFoldAperture(foldScore, coherence);
+  const previewDistance = 8 + foldFactor * 12;
+  const constraints = evaluateConstraints({
+    energy,
+    curvature,
+    coherence,
+    instability,
+    distance: previewDistance,
+  });
+  const gammaEff = computeGammaEffective({
+    instability,
+    coherence,
+    aperture,
+    eta,
+  });
+  const visibility = computeVisibility({
+    Gamma: gammaEff,
+    T: 1e-6,
+    dx: aperture * 1e-3 + foldFactor * 5e-4,
+  });
 
   const draw = useCallback(() => {
     const cv = ref.current; if (!cv) return;
@@ -214,6 +253,49 @@ function FoldSpaceEngine() {
           <span style={{ color: P.glow2, fontWeight: 700 }}>PRINCIPLE:</span> As mM approaches 0 the nonlocal interaction goes infinite-range, folding separated points together.<br /><br />
           <span style={{ color: P.ember, fontWeight: 600 }}>Drag Fold factor</span> to collapse the spacetime grid.
         </GlowBox>
+        <button
+          type="button"
+          onClick={() => setShowResearch((current) => !current)}
+          style={{
+            marginTop: 12,
+            width: "100%",
+            border: "1px solid " + P.border,
+            background: showResearch ? P.glow2 + "18" : P.panel,
+            color: showResearch ? P.glow2 : P.text,
+            borderRadius: 7,
+            padding: "10px 12px",
+            cursor: "pointer",
+            fontFamily: FONT,
+            fontSize: 12,
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+          }}
+        >
+          {showResearch ? "Hide Research Preview" : "Show Research Preview"}
+        </button>
+        {showResearch && (
+          <div style={{ marginTop: 12, padding: "12px 14px", borderRadius: 7, border: "1px solid " + P.border, background: P.panel }}>
+            <div style={{ color: P.dim, fontSize: 12, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Phase V Preview</div>
+            <Knob label="Energy Density" value={energy} onChange={setEnergy} min={0} max={1} step={0.01} />
+            <Knob label="Curvature" value={curvature} onChange={setCurvature} min={0} max={1} step={0.01} color={P.glow2} />
+            <Knob label="Coherence" value={coherence} onChange={setCoherence} min={0} max={1} step={0.01} color={P.glow3} />
+            <Knob label="Ethical Bias" value={ethics} onChange={setEthics} min={-1} max={1} step={0.01} color={P.green} />
+            <Knob label="Instability" value={instability} onChange={setInstability} min={0} max={1} step={0.01} color={P.ember} />
+            <Knob label="η Selection Bias" value={eta} onChange={setEta} min={-1.5} max={1.5} step={0.01} color={P.gold} />
+            <GlowBox color={P.glow} glow>
+              <strong>Fold Score:</strong> {foldScore.toFixed(3)}<br />
+              <strong>Classification:</strong> {foldClass}<br />
+              <strong>Visibility:</strong> {visibility.toFixed(6)}<br />
+              <strong>Effective Γ:</strong> {gammaEff.toExponential(2)}
+            </GlowBox>
+            <GlowBox color={constraints.causalitySafe && constraints.topologyStable ? P.green : P.ember}>
+              <strong>Causality:</strong> {constraints.causalitySafe ? "SAFE" : "VIOLATION"}<br />
+              <strong>Topology:</strong> {constraints.topologyStable ? "STABLE" : "UNSTABLE"}<br />
+              <strong>Return Path:</strong> {constraints.returnPathAvailable ? "YES" : "NO"}<br />
+              <strong>Risk:</strong> {(constraints.riskScore * 100).toFixed(1)}%
+            </GlowBox>
+          </div>
+        )}
       </div>
     </div>
   </div>);

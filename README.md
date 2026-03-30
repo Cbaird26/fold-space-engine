@@ -1,12 +1,14 @@
 # Fold-Space Engine
 
 Primary public technology demonstration for the current MQGT-SCF software surface.
+This repository is the constrained public demo, not the full research platform.
 
 This repo turns the original single-file prototype into a standalone React app with:
 
 - a default **Probability Sculptor** panel
 - a flagship **Fold-Space Engine** companion panel
 - companion technology panels for probability sculpting, timeline selection, and related toy dynamics
+- a compact, collapsed `Research Preview` inside the Fold-Space Engine tab
 - explicit **correctness checks** on the non-visual branch-weight math
 - GitHub Actions CI and GitHub Pages deployment
 
@@ -40,6 +42,8 @@ Presentation-only:
 - canvas rendering
 - particle motion
 - visual glow, distortion, and layout effects
+
+The small `Research Preview` uses additional internal helper modules for fold score, constraint, and visibility estimates. It is still demo-facing and does not replace the separate Phase V research scaffold.
 
 Run the checks with:
 
