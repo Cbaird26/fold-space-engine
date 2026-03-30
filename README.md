@@ -4,7 +4,8 @@ Primary public technology demonstration for the current MQGT-SCF software surfac
 
 This repo turns the original single-file prototype into a standalone React app with:
 
-- a flagship **Fold-Space Engine** panel
+- a default **Probability Sculptor** panel
+- a flagship **Fold-Space Engine** companion panel
 - companion technology panels for probability sculpting, timeline selection, and related toy dynamics
 - explicit **correctness checks** on the non-visual branch-weight math
 - GitHub Actions CI and GitHub Pages deployment

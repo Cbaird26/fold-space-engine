@@ -612,8 +612,8 @@ function QualionChamber() {
 }
 
 const DEVICES = [
-  { id: "fold", label: "Fold-Space Engine", color: P.glow2, comp: FoldSpaceEngine },
   { id: "sculptor", label: "Probability Sculptor", color: P.glow, comp: ProbabilitySculptor },
+  { id: "fold", label: "Fold-Space Engine", color: P.glow2, comp: FoldSpaceEngine },
   { id: "timeline", label: "Timeline Selector", color: P.green, comp: TimelineSelector },
   { id: "jhana", label: "Jh\u0101na Engine", color: P.glow3, comp: JhanaEngine },
   { id: "teleology", label: "Teleological Accelerator", color: P.gold, comp: TeleologicalAccelerator },
@@ -621,7 +621,7 @@ const DEVICES = [
 ];
 
 export default function App() {
-  const [active, setActive] = useState("fold");
+  const [active, setActive] = useState("sculptor");
   const Comp = DEVICES.find(d => d.id === active).comp;
 
   return (
@@ -629,11 +629,11 @@ export default function App() {
       <div style={{ position: "relative", zIndex: 1, padding: "20px 18px" }}>
         <div style={{ marginBottom: 18 }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-            <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#fff", fontFamily: "'Georgia', serif" }}>Fold-Space Engine</h1>
-            <span style={{ fontSize: 11, color: P.glow2, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>Flagship · MQGT\u2013SCF interactive lab</span>
+            <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#fff", fontFamily: "'Georgia', serif" }}>Probability Sculptor</h1>
+            <span style={{ fontSize: 11, color: P.glow, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>Primary · MQGT\u2013SCF interactive lab</span>
           </div>
           <div style={{ fontSize: 12, color: P.dim, marginTop: 4, maxWidth: 720, lineHeight: 1.6 }}>
-            {"Primary surface: the Fold-Space Engine visualizes Yukawa-style nonlocal contraction (toy kernel). Companion panels explore measure tilt, branch selection, \u03A6c\u2013E landscapes, teleology, and qualion dynamics. Grounded in MQGT\u2013SCF notation by C. M. Baird. "}
+            {"Primary surface: Probability Sculptor visualizes \u03b7-tilted branch weighting. Companion panels explore Fold-Space contraction, timeline selection, \u03A6c\u2013E landscapes, teleology, and qualion dynamics. Grounded in MQGT\u2013SCF notation by C. M. Baird. "}
             <span style={{ color: P.ember, fontWeight: 600 }}>Illustrative software; not a hardware claim.</span>
           </div>
           <div style={{ height: 1, background: "linear-gradient(90deg, "+P.glow+"40, "+P.glow2+"25, "+P.gold+"18, transparent)", marginTop: 12 }} />
