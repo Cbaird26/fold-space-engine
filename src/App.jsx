@@ -629,7 +629,7 @@ export default function App() {
       <div style={{ position: "relative", zIndex: 1, padding: "20px 18px" }}>
         <div style={{ marginBottom: 18 }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-            <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#fff", fontFamily: "'Georgia', serif" }}>Probability Sculptor</h1>
+            <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#fff", fontFamily: "'Georgia', serif" }}>Fold-Space Engine</h1>
             <span style={{ fontSize: 11, color: P.glow, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>Primary · MQGT\u2013SCF interactive lab</span>
           </div>
           <div style={{ fontSize: 12, color: P.dim, marginTop: 4, maxWidth: 720, lineHeight: 1.6 }}>
