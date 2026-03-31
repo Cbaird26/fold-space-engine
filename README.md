@@ -1,7 +1,18 @@
 # Fold-Space Engine
 
-Primary public technology demonstration for the current MQGT-SCF software surface.
-This repository is the constrained public demo, not the full research platform.
+Original Part I public foundation for the Fold-Space / Zora Discovery app family.
+This repository is the constrained public demo surface, not the canonical artifact and not the combined compilation app.
+
+Live site:
+
+- https://cbaird26.github.io/fold-space-engine/
+
+Related public repos:
+
+- Part II artifact/reference: [`fold-space-engine-phase-v`](https://github.com/Cbaird26/fold-space-engine-phase-v)
+- Combined web app: [`zora-discovery`](https://github.com/Cbaird26/zora-discovery)
+- Mobile shell: [`zora-discovery-mobile`](https://github.com/Cbaird26/zora-discovery-mobile)
+- Desktop shell: [`zora-discovery-desktop`](https://github.com/Cbaird26/zora-discovery-desktop)
 
 This repo turns the original single-file prototype into a standalone React app with:
 
@@ -13,6 +24,17 @@ This repo turns the original single-file prototype into a standalone React app w
 - GitHub Actions CI and GitHub Pages deployment
 
 This is still **illustrative software**. It is a mathematically structured interactive lab, not a hardware claim.
+
+## Repo role
+
+Use this repo when you want the original public Part I shell with the smallest surface area.
+
+Do not use this repo as:
+
+- the artifact/reference build
+- the combined web compilation surface
+- the mobile runtime
+- the desktop runtime
 
 ## Why this is the main technology surface
 
